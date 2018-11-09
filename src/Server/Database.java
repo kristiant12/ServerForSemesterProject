@@ -396,6 +396,14 @@ public class Database {
 //        ResultSet øv = null;
 //        List<Case> test = new ArrayList();
 //        
+//        String title = "";
+//        String caseId = "";
+//        String budget = "";
+//        String deadline = "";
+//        String component = "";
+//         
+//        
+//        
 //        try{
 //            a = db.createStatement();
 //            øv = a.executeQuery("select * cases from cases,creates where cases.caseID = creates.caseid and creates.email = '"+per.getEmail()+"'");
@@ -403,7 +411,7 @@ public class Database {
 //            
 //            
 //            while(øv.next()){
-//                test.add(e)
+//                test.add();
 //            }
 //                
 //            
@@ -413,7 +421,7 @@ public class Database {
 //           
 //           
 //       } 
-           
+//           
           
         public static void main(String[] args) {
         Database a = new Database();
