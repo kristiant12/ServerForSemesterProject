@@ -21,6 +21,15 @@ public class testMian {
         int i = rand.nextInt(1000000);
         
         System.out.println(i);
+        int value = 0;
+        
+        
+        while(true){
+        
+        if(value == 1){
+            
+        }
+        }
         
         
 //        HashMap<String,Integer> a = new HashMap();

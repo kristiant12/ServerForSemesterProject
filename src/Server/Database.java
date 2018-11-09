@@ -69,7 +69,6 @@ public class Database {
         list.addAll(getManufacturer());
         
         return list;
-        
     }
     
     
@@ -232,6 +231,8 @@ public class Database {
             list = findCase();
             return list;
         }
+
+
         
         public Case insertIntoDb(Case caseid){
             Case a = caseid;
@@ -390,50 +391,95 @@ public class Database {
           } 
        }
         
-        // denne metode skal laves i morgen  
-//      public List<Case> getSpecificPersonCase(Customer per){
-//        Statement a = null;
-//        ResultSet øv = null;
-//        List<Case> test = new ArrayList();
-//        
-//        String title = "";
-//        String caseId = "";
-//        String budget = "";
-//        String deadline = "";
-//        String component = "";
-//         
-//        
-//        
-//        try{
-//            a = db.createStatement();
-//            øv = a.executeQuery("select * cases from cases,creates where cases.caseID = creates.caseid and creates.email = '"+per.getEmail()+"'");
-// 
-//            
-//            
-//            while(øv.next()){
-//                test.add();
-//            }
-//                
-//            
-//        } catch (Exception ex) {
-//            
-//        }
-//           
-//           
-//       } 
-//           
+       
+       
+        public List<Case> getSpecificUserCaseList(Customer per){
+            List<Case> list = new ArrayList();
+            list = getSpecificPersonCase(per);
+            return list;
+            
+        }
+      public List<Case> getSpecificPersonCase(Customer per){
+        Statement a = null;
+        ResultSet øv = null;
+        
+        List<Case> test = new ArrayList();
+        
+        String title = "";
+        String caseID = "";
+        String budget = "";
+        String deadline = "";
+        String component = "";
+        String freeText = "";
+        int value = 0;
+        boolean redgjordt = false;
+        
+        
+        try{
+            a = db.createStatement();
+            øv = a.executeQuery("select * from cases,creates where cases.caseID = creates.caseid And creates.email = '"+per.getEmail()+"'");
+ 
+            
+            
+            while(øv.next()){
+                    title = øv.getString(1);
+                    caseID = øv.getString(2);
+                    budget = øv.getString(3);
+                    deadline = øv.getString(4);
+                    component = øv.getString(5);
+                    freeText = øv.getString(6);
+                    //value = øv.getInt(7);
+                    
+//                    if(value == 1){
+//                        redgjordt = true;
+//                    }else{
+//                        redgjordt = false;
+//                    }
+                
+                test.add(new Case(title, caseID, budget, deadline, component, false, freeText) );
+            }
+                
+            
+        } catch (Exception ex) {
+            
+        }
+           return test;
+           
+       } 
+           
           
         public static void main(String[] args) {
         Database a = new Database();
         //Case f = new Case("dsds", "dsaa32131a", "test", "test", "ding", false, "test");
         
-        
-        Customer d = new Customer("person1", "ke", "hvemved",  34834, "test", "fff");
-        Case f = new Case("lort", "omasds", "567890", "aldrig", "lort", true, "ubnds okz doids");
-        
-        a.doStuff(d, f);
+                
         
         
+       Customer cu = new Customer("hallo", "oleolesen", "danmark",876543, "osndoins", "dsdsds");
+       // Customer d = new Customer("person1", "ke", "hvemved",  34834, "osndoins", "fff");
+        
+        
+        List<Case>  test = a.getSpecificUserCaseList(cu);
+        
+            System.out.println(a.checkIfEmailExist(cu));
+        
+            for (int i = 0; i < test.size(); i++) {
+                System.out.println(test.get(i).toString());
+            }
+
+        List<Case> tp = new ArrayList();
+        tp.addAll(test);
+        
+            System.out.println("ssd");
+        
+        
+            for (int i = 0; i < tp.size(); i++) {
+                System.out.println(tp.get(i).toString());
+
+            }
+            
+            
+            System.out.println("tesffdd");
         
        
              

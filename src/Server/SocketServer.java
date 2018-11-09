@@ -35,6 +35,7 @@ public class SocketServer extends Thread {
     private ObjectOutputStream mapObjectOutputStream;
     private List<User> listUser;
     private List<Case> listCase;
+    private List<Case> listToSpecifikUserOfCases;
     private Map<User,Case> mapOfUserAndCase;
     private SocketServer(Socket socket, Database db) {
         this.db = db;
@@ -51,6 +52,7 @@ public class SocketServer extends Thread {
         oin = null;
         listCase = new ArrayList();
         listUser = new ArrayList<>();
+         listToSpecifikUserOfCases = new ArrayList<>();
         try {
             //denne sender til clieneten
             out = socket.getOutputStream();
@@ -90,6 +92,10 @@ public class SocketServer extends Thread {
 //                }
                 else if(request.equals("7")){
                     getMapOfUserAndCase();
+                }
+                
+                else if(request.equals("10")){
+                    sendCaseFromAUser();
                 }
 
                 
@@ -146,6 +152,17 @@ public class SocketServer extends Thread {
         mapObjectOutputStream.writeObject(listCase);
 
     }
+    
+    public void sendCaseFromAUser() throws IOException, ClassNotFoundException{
+        User a = (User) oin.readObject();
+
+        listToSpecifikUserOfCases.addAll(db.getSpecificUserCaseList((Customer) a));
+        mapObjectOutputStream.writeObject(listToSpecifikUserOfCases);
+        
+        
+    }
+    
+    
     
     public void getUser() throws IOException, ClassNotFoundException{
         User a = (User) oin.readObject();
