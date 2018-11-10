@@ -143,6 +143,8 @@ public class SocketServer extends Thread {
     public void sendListOfUseres () throws IOException{
         listUser.addAll(db.getUser());
         mapObjectOutputStream.writeObject(listUser);
+        mapObjectOutputStream.flush();
+
 //        map.putAll(db.getUser());
 //            mapObjectOutputStream.writeObject(map);
     }
@@ -150,15 +152,21 @@ public class SocketServer extends Thread {
     public void sendListOfCases() throws IOException{
         listCase.addAll(db.getCases());
         mapObjectOutputStream.writeObject(listCase);
+        mapObjectOutputStream.flush();
+
 
     }
     
     public void sendCaseFromAUser() throws IOException, ClassNotFoundException{
-        User a = (User) oin.readObject();
-
-        listToSpecifikUserOfCases.addAll(db.getSpecificUserCaseList((Customer) a));
-        mapObjectOutputStream.writeObject(listToSpecifikUserOfCases);
+        Customer a = (Customer) oin.readObject();
+        List<Case> test = new ArrayList();
         
+        test.addAll(db.getSpecificUserCaseList(a));
+        mapObjectOutputStream.writeObject(test);
+        mapObjectOutputStream.flush();
+        
+//        listToSpecifikUserOfCases.addAll(db.getSpecificUserCaseList((Customer) a));
+//        mapObjectOutputStream.writeObject(listToSpecifikUserOfCases);
         
     }
     
@@ -183,12 +191,7 @@ public class SocketServer extends Thread {
         db.deleteCase(a);
        // System.out.println(a.toString());
     }
-       
-     
-       
-       
-       
-       
+
        public void getMapOfUserAndCase() throws IOException, ClassNotFoundException{
           HashMap<User,Case> a = (HashMap<User,Case>) oin.readObject();
           User us = null;

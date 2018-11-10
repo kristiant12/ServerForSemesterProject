@@ -428,15 +428,15 @@ public class Database {
                     deadline = øv.getString(4);
                     component = øv.getString(5);
                     freeText = øv.getString(6);
-                    //value = øv.getInt(7);
+                    value = øv.getInt(7);
                     
-//                    if(value == 1){
-//                        redgjordt = true;
-//                    }else{
-//                        redgjordt = false;
-//                    }
+                    if(value == 1){
+                        redgjordt = true;
+                    }else{
+                        redgjordt = false;
+                    }
                 
-                test.add(new Case(title, caseID, budget, deadline, component, false, freeText) );
+                test.add(new Case(title, caseID, budget, deadline, component, redgjordt, freeText) );
             }
                 
             
@@ -458,7 +458,10 @@ public class Database {
        Customer cu = new Customer("hallo", "oleolesen", "danmark",876543, "osndoins", "dsdsds");
        // Customer d = new Customer("person1", "ke", "hvemved",  34834, "osndoins", "fff");
         
-        
+       Case sos = new Case("test", "CaseID 7890", "sasd", "sese", "sds",true, "sdsd");
+       
+       a.doStuff(cu, sos);
+       
         List<Case>  test = a.getSpecificUserCaseList(cu);
         
             System.out.println(a.checkIfEmailExist(cu));
