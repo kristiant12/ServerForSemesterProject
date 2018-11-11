@@ -178,7 +178,7 @@ public class SocketServer extends Thread {
     public void getUser() throws IOException, ClassNotFoundException{
         User a = (User) oin.readObject();
         db.createUser(a);
-        //System.out.println(a.toString());
+        System.out.println(a.toString());
         
         }
     
