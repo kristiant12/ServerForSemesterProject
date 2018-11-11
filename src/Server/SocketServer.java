@@ -97,6 +97,9 @@ public class SocketServer extends Thread {
                 else if(request.equals("10")){
                     sendCaseFromAUser();
                 }
+                else if(request.equals("11")){
+                    edidtCase();
+                }
 
                 
                 
@@ -206,6 +209,14 @@ public class SocketServer extends Thread {
 
         }
           db.doStuff((Customer) us, ca);
+       }
+       
+       public void edidtCase() throws IOException, ClassNotFoundException{
+           Case a = (Case) oin.readObject();
+           db.editCase(a);
+           
+           
+           
        }
        
        

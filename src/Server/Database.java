@@ -63,6 +63,7 @@ public class Database {
           
      public List<User> getUser(){
         List<User> list = new ArrayList(); 
+        list.clear(); 
         list.addAll(getAdmin());
         list.addAll(getCustomer());
         list.addAll(getEmployee());
@@ -275,7 +276,7 @@ public class Database {
 
         }
     }
-           public void createManufacturer(Manufacturer j) {
+        public void createManufacturer(Manufacturer j) {
         Statement a = null;
         ResultSet øv = null;
        
