@@ -100,6 +100,10 @@ public class SocketServer extends Thread {
                 else if(request.equals("11")){
                     edidtCase();
                 }
+                else if(request.equals("12")){
+                   getAllNotEvaluatetCases();
+                }
+                
 
                 
                 
@@ -147,6 +151,7 @@ public class SocketServer extends Thread {
         listUser.addAll(db.getUser());
         mapObjectOutputStream.writeObject(listUser);
         mapObjectOutputStream.flush();
+        listUser.clear();
 
 //        map.putAll(db.getUser());
 //            mapObjectOutputStream.writeObject(map);
@@ -156,6 +161,7 @@ public class SocketServer extends Thread {
         listCase.addAll(db.getCases());
         mapObjectOutputStream.writeObject(listCase);
         mapObjectOutputStream.flush();
+        listCase.clear();
 
 
     }
@@ -219,6 +225,13 @@ public class SocketServer extends Thread {
            
        }
        
+       public void getAllNotEvaluatetCases() throws IOException{
+           List<Case> notEval = db.getNotEvaluadedCase();
+           mapObjectOutputStream.writeObject(notEval);
+           
+           
+           
+       }       
        
        
     
