@@ -148,17 +148,19 @@ public class SocketServer extends Thread {
     }
     
     public void sendListOfUseres () throws IOException{
-        listUser.addAll(db.getUser());
-        mapObjectOutputStream.writeObject(listUser);
+      List<User> test = new ArrayList();
+        test.addAll(db.getUser());
+        mapObjectOutputStream.writeObject(test);
         mapObjectOutputStream.flush();
-        listUser.clear();
+        //listUser.clear();
 
 //        map.putAll(db.getUser());
 //            mapObjectOutputStream.writeObject(map);
     }
     
     public void sendListOfCases() throws IOException{
-        listCase.addAll(db.getCases());
+        List<Case> test = new ArrayList();
+        test.addAll(db.getCases());
         mapObjectOutputStream.writeObject(listCase);
         mapObjectOutputStream.flush();
         listCase.clear();
